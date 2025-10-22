@@ -1,0 +1,244 @@
+.navbar-nav .nav-item + .nav-item {
+  border-left: 1px solid #ccc;
+  padding-left: .75rem;
+  margin-left: .75rem;
+}
+
+.banner-image{
+   width: 100%;
+  height: 50%;
+  display: block; 
+}
+
+.contact-image{
+   width: 100%;
+  height: 20%;
+  display: block; 
+
+}
+
+/*.contact-text {
+  position: absolute;
+  top: 50%;   /* vertical center 
+  left: 50%;  /* horizontal center 
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: rgba(0,0,0,0.5); /* semi-opaque background 
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+
+.contact-text h2 {
+  font-size: 4.6rem;   /* bigger title 
+  font-weight: bold; /* make it bold 
+}
+
+.contact-text p {
+  font-size: 2.25rem; /* bigger paragraph 
+}
+*/
+
+.big-title {
+  font-size: 3rem;     
+  text-align: center;  
+  font-weight: bold;   
+  margin: 20px 0;      
+}
+
+.custom-underline {
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: orange;
+  text-decoration-thickness: 3px; /* thickness of underline */
+}
+body {
+  margin: 0;
+  padding: 0 0 0;
+  font-family: 'Montserrat', sans-serif;
+  /*background: linear-gradient(to right,
+    #5DADE2 0%,
+    #5DADE2 5%,
+    white 5%,
+    white 95%,
+    #5DADE2 95%,
+    #5DADE2 100%
+  );*/
+  min-height: 100vh;
+  padding-top: 120px
+}
+
+
+/* left and right images */
+
+
+.bg-lightgrey{
+background-color: lightgrey;
+}
+
+.carousel-item img {
+  height: 400px;   /* adjust as needed */
+  object-fit: cover; /* crop instead of squish */
+}
+
+.custom-caption {
+  background: rgba(0, 0, 0, 0.5); /* black with 50% opacity */
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block; /* shrink background to text size */
+}
+
+
+
+.image-text {
+  position: absolute;
+  top: 50%;   /* vertical center */
+  left: 50%;  /* horizontal center */
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: rgba(0,0,0,0.5); /* semi-opaque background */
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+
+.image-text h2 {
+  font-size: 4.6rem;   /* bigger title */
+  font-weight: bold; /* make it bold */
+}
+
+.image-text p {
+  font-size: 2.25rem; /* bigger paragraph */
+}
+
+.light-blue-bg {
+  background-color: #00408a; /* light blue */
+  color: white; /* text color for contrast */
+}
+
+.custom-wide {
+  max-width: 2500px;
+}
+
+.bg-image-overlay {
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/construction3.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  color: white;
+}
+
+.small-logo {
+  width: 100px;
+  height: auto;
+}
+
+.bg-image-overlay2 {
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/blackbackground4.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  color: white;
+}
+
+.bg-image-overlay3 {
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/milasbackground.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  color: white;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh; /* or 80vh if you want shorter */
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;            /* instead of auto */
+  object-fit: cover;       /* keeps image proportions */
+  transition: all 0.4s ease;
+  display: block;
+}
+
+/* Darken and zoom image on hover */
+.image-container:hover .banner-image {
+  filter: brightness(70%);
+  transform: scale(1.05);
+}
+
+/* Center text + button */
+.image-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+/* Button styling */
+.cta-btn {
+  background-color: white;
+   text-decoration: none;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  opacity: 0;
+  margin-top: 15px;
+  transition: all 0.4s ease;
+}
+
+/* Show button smoothly on hover */
+.image-container:hover .cta-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional: subtle animation start offset */
+.cta-btn {
+  transform: translateY(10px);
+}
+
+.parallax-section {
+  background-image: url("./assets/milasbackground.png");
+  background-attachment: fixed;  /* <— the key part */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh; /* or whatever fits */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0 */
+  background: rgba(70, 68, 68, 0.5); /* adjust opacity for desired darkness */
+  z-index: 1;
+}
+
+/* make sure text stays on top of overlay */
+.text-box {
+  position: relative;
+  z-index: 2;
+  padding: 20px 40px;
+}
+
+.company-logo {
+  width: 190px; /* adjust as needed */
+  height: auto; /* keeps the aspect ratio */
+}
+
+.company-logo2 {
+  width: 300px; /* adjust as needed */
+  height: auto; /* keeps the aspect ratio */
+}
