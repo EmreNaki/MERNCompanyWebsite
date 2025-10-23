@@ -18,10 +18,13 @@ export const EditProject = () => {
   const [finishDate, setFinishDate] = useState("");
   const [loading, setLoading] = useState(true);
 
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+
+
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/projects/${id}`);
+        const res = await axios.get(`${API_URL}/api/projects/${id}`);
         setName(res.data.name);
         setAdress(res.data.adress);
         setText(res.data.text);

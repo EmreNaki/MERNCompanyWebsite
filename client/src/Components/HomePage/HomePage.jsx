@@ -15,8 +15,8 @@ export const HomePage = () => {
   <img src={background6} alt="Description" className="banner-image" />
 
   <div className="image-text">
-    <h2>Strong Foundation</h2>
-    <p>Building with quality and trust</p>
+    <h2>Güçlü Temeller</h2>
+    <p>Kalite ve güvenle inşa ediyoruz</p>
   <Link to="/pastprojects" className="cta-btn">Projelerimize Göz Atın</Link>
   </div>
 </div>
@@ -31,7 +31,7 @@ export const HomePage = () => {
           <div className='col text-dark'>
                         <div className="text-box">
 
-          <h3 className='text-center text-dark d-flex justify-content-center align-items-center pt-5'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque animi nemo voluptatum quam necessitatibus illo expedita, cum iusto laudantium ab sequi libero vero. Doloremque quos pariatur ipsum. Natus, ex illo!</h3>
+          <h3 className='text-center text-dark d-flex justify-content-center align-items-center pt-5'>15 yıllık tecrübemizle, Cömertler Yapı ve Mühendislik olarak inşaat ve mühendislik alanında güven, kalite ve estetiği bir araya getiriyoruz. Her projede sağlam temeller üzerine modern yaşam alanları inşa ediyor, müşteri memnuniyetini daima ön planda tutuyoruz.</h3>
         </div>
          </div>
        
@@ -74,9 +74,7 @@ export const HomePage = () => {
               >
                 {/* Image placeholder */}
               </div>
-              <p className="card-text">
-                This is the first card with a placeholder for an image.
-              </p>
+              
             </div>
           </div>
         </div>
@@ -94,9 +92,7 @@ export const HomePage = () => {
               >
                 {/* Image placeholder */}
               </div>
-              <p className="card-text">
-                This is the second card with a placeholder for an image.
-              </p>
+              
             </div>
           </div>
         </div>

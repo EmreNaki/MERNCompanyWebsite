@@ -6,11 +6,12 @@ import { useNavigate } from 'react-router-dom'
 
 export const FutureProjects  = ({ isLoggedIn }) => {
     const [projects, setProjects] = useState([])
-    
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const res = await axios.get("http://localhost:4000/api/projects/future")
+                const res = await axios.get(`${API_URL}/api/projects/future`)
                 setProjects(res.data)
             } catch (err) {
                 console.error("Failed to fetch projects", err)

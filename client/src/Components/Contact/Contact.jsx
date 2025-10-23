@@ -10,10 +10,12 @@ export const Contact  = () => {
   const [name, setName] = useState("")
   const [text, setText] = useState("")
 
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+
   const handleSubmit = async(e) => {
     e.preventDefault()
     try{
-      await axios.post("http://localhost:4000/api/messages", {
+      await axios.post(`${API_URL}/api/messages`, {
         mail, name, text
       },{
         headers: { "Content-Type": "application/json" }
@@ -40,7 +42,7 @@ export const Contact  = () => {
   className="col p-5"
  
 >
-           <p><FaMapMarkerAlt /> Mahallesi, Hacı Abdi, 30 Ağustos Cd. No:9/b, 48200 Milas/Muğlal</p>
+           <p><FaMapMarkerAlt />Hacı Abdi Mahallesi, 30 Ağustos Cd. No:9/B, 48200 Milas/Muğla</p>
       <p><FaPhoneAlt /> +90 555 123 4567</p>
       <p><FaEnvelope /> info@company.com</p>
            

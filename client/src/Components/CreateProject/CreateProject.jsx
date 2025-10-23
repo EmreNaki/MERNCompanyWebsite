@@ -14,6 +14,8 @@ const CreateProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
     try {
       const formData = new FormData();
@@ -25,7 +27,7 @@ const CreateProject = () => {
       formData.append("startDate", startDate);
       formData.append("finishDate", finishDate);
 
-      await axios.post("http://localhost:4000/api/projects", formData, {
+      await axios.post(`${API_URL}/api/projects`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

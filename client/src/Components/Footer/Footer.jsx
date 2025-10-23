@@ -13,17 +13,15 @@ export const Footer = () => {
       <section className="d-flex justify-content-center justify-content-lg-between py-2 border-bottom">
         {/* Left */}
         <div className="me-3 d-none d-lg-block small">
-          Get connected with us on social networks:
+          Sosyal medyadan bize ulaşın:
         </div>
 
         {/* Right */}
         <div>
   <a href="#" className="me-2 text-light"><FaFacebookF /></a>
-  <a href="#" className="me-2 text-light"><FaTwitter /></a>
-  <a href="#" className="me-2 text-light"><FaGoogle /></a>
+
   <a href="#" className="me-2 text-light"><FaInstagram /></a>
-  <a href="#" className="me-2 text-light"><FaLinkedin /></a>
-  <a href="#" className="me-2 text-light"><FaGithub /></a>
+  
 </div>
       </section>
 
@@ -51,7 +49,7 @@ export const Footer = () => {
             {/* Contact */}
             <div className="col-md-4 mx-auto mb-2">
               <h6 className="text-uppercase fw-bold mb-2">ADRES</h6>
-              <p className="small mb-1"><i className="fas fa-home me-2"></i>New York, NY 10012, US</p>
+              <p className="small mb-1"><i className="fas fa-home me-2"></i>Hacı Abdi Mah., 30 Ağustos Cd. No:9/B, 48200 Milas/Muğla</p>
               <p className="small mb-1"><i className="fas fa-envelope me-2"></i>info@example.com</p>
               <p className="small mb-1"><i className="fas fa-phone me-2"></i>+ 01 234 567 88</p>
               <p className="small mb-0"><i className="fas fa-print me-2"></i>+ 01 234 567 89</p>
