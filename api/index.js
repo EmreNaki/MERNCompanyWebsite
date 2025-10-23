@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 4000;
 // 🧠 CORS — development ve production için ayır
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://yourdomain.com" // kendi domainini buraya ekle
+  "https://merncompanywebsitefe.onrender.com" // kendi domainini buraya ekle
 ];
 
 app.use(cors({
