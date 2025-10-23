@@ -1,42 +1,58 @@
 import express from "express";
 import multer from "multer";
 import Project from "../models/Project.js";
+import cloudinary from "../config/cloudinary.js";
+import fs from "fs";
 
-const router = express.Router()
+const router = express.Router();
 
+// Multer stores files temporarily before upload
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, "uploads/")
-    },
-    filename: function(req, file, cb){
-        cb(null, Date.now() + "-" +file.originalname)
-    }
-})
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // temporary local folder
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 
-const upload = multer({ storage})
+const upload = multer({ storage });
 
+// CREATE project and upload image to Cloudinary
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { name, adress, text, done, startDate, finishDate } = req.body;
-    const imagePath = req.file ? `/uploads/${req.file.filename}` : "";
+
+    let imageUrl = "";
+    if (req.file) {
+      // Upload to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "projects", // optional Cloudinary folder
+      });
+      imageUrl = result.secure_url;
+
+      // Delete local temp file
+      fs.unlinkSync(req.file.path);
+    }
 
     const project = await Project.create({
       name,
       adress,
       text,
-      image: imagePath,
+      image: imageUrl,
       done: done === "true" || done === true,
-      startDate: startDate ? new Date(startDate) : undefined,     // parse string to Date
-      finishDate: finishDate ? new Date(finishDate) : undefined,  // parse string to Date
+      startDate: startDate ? new Date(startDate) : undefined,
+      finishDate: finishDate ? new Date(finishDate) : undefined,
     });
 
     res.status(201).json(project);
   } catch (err) {
-    console.error(err);
+    console.error("Create project error:", err);
     res.status(500).json({ error: "Failed to create project" });
   }
 });
 
+// UPDATE project (optional new image)
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     const { name, adress, text, done, startDate, finishDate } = req.body;
@@ -49,7 +65,11 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     };
 
     if (req.file) {
-      updatedData.image = `/uploads/${req.file.filename}`;
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "projects",
+      });
+      updatedData.image = result.secure_url;
+      fs.unlinkSync(req.file.path);
     }
 
     if (startDate) updatedData.startDate = new Date(startDate);
@@ -63,20 +83,22 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
     res.json(updatedProject);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Update project error:", err);
+    res.status(500).json({ error: "Failed to update project" });
   }
 });
 
+// GET all projects
 router.get("/", async (req, res) => {
   try {
     const projects = await Project.find();
     res.json(projects);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Failed to fetch projects" });
   }
-}); 
+});
 
+// GET past projects
 router.get("/past", async (req, res) => {
   try {
     const projects = await Project.find({ done: true });
@@ -86,7 +108,7 @@ router.get("/past", async (req, res) => {
   }
 });
 
-// Future projects (done = false)
+// GET future projects
 router.get("/future", async (req, res) => {
   try {
     const projects = await Project.find({ done: false });
@@ -96,23 +118,23 @@ router.get("/future", async (req, res) => {
   }
 });
 
+// GET project by ID
 router.get("/:id", async (req, res) => {
   try {
     const project = await Project.findById(req.params.id);
-    if (!project) {
-      return res.status(404).json({ error: "Project not found" });
-    }
+    if (!project) return res.status(404).json({ error: "Project not found" });
     res.json(project);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Failed to fetch project" });
   }
 });
 
+// DELETE project
 router.delete("/:id", async (req, res) => {
   try {
     const deletedProject = await Project.findByIdAndDelete(req.params.id);
-    if (!deletedProject) return res.status(404).json({ error: "Project not found" });
+    if (!deletedProject)
+      return res.status(404).json({ error: "Project not found" });
 
     res.json({ message: "Project deleted successfully" });
   } catch (err) {
@@ -120,4 +142,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete project" });
   }
 });
+
 export default router;
