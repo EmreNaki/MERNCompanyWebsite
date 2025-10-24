@@ -12,14 +12,13 @@ export const EditProject = () => {
   const [adress, setAdress] = useState("");
   const [text, setText] = useState("");
   const [done, setDone] = useState(false);
-  const [image, setImage] = useState("");
-  const [newImage, setNewImage] = useState(null);
+  const [images, setImages] = useState([]); // multiple images
+  const [newImages, setNewImages] = useState([]); // new uploads
   const [startDate, setStartDate] = useState("");
   const [finishDate, setFinishDate] = useState("");
   const [loading, setLoading] = useState(true);
 
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
-
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -29,7 +28,7 @@ export const EditProject = () => {
         setAdress(res.data.adress);
         setText(res.data.text);
         setDone(res.data.done);
-        setImage(res.data.image);
+        setImages(res.data.images || []);
         setStartDate(res.data.startDate ? res.data.startDate.split("T")[0] : "");
         setFinishDate(res.data.finishDate ? res.data.finishDate.split("T")[0] : "");
         setLoading(false);
@@ -51,11 +50,13 @@ export const EditProject = () => {
       formData.append("done", done);
       formData.append("startDate", startDate);
       formData.append("finishDate", finishDate);
-      if (newImage) {
-        formData.append("image", newImage);
+
+      // append all new images
+      for (let i = 0; i < newImages.length; i++) {
+        formData.append("images", newImages[i]);
       }
 
-      await axios.put(`http://localhost:4000/api/projects/${id}`, formData, {
+      await axios.put(`${API_URL}/api/projects/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -105,29 +106,40 @@ export const EditProject = () => {
             ></textarea>
           </div>
 
+          {/* Display existing images */}
           <div className="mb-3">
-            <label className="form-label">Current Image</label>
-            {image && (
-              <img
-                src={`http://localhost:4000${image}`}
-                alt="Preview"
-                className="d-block mb-2"
-                style={{ maxWidth: "200px", borderRadius: "8px" }}
-              />
-            )}
+            <label className="form-label">Current Images</label>
+            <div className="d-flex flex-wrap gap-3">
+              {images.length > 0 ? (
+                images.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`Project ${index}`}
+                    style={{ maxWidth: "200px", borderRadius: "8px" }}
+                  />
+                ))
+              ) : (
+                <p>No images</p>
+              )}
+            </div>
           </div>
 
+          {/* Upload multiple images */}
           <div className="mb-3">
-            <label className="form-label">Upload New Image</label>
+            <label className="form-label">Upload New Images (max 4)</label>
             <input
               type="file"
               className="form-control"
-              onChange={(e) => setNewImage(e.target.files[0])}
+              multiple
+              onChange={(e) => setNewImages([...e.target.files])}
             />
           </div>
 
           <div className="mb-3">
-            <label htmlFor="doneSelect" className="form-label">Project Status</label>
+            <label htmlFor="doneSelect" className="form-label">
+              Project Status
+            </label>
             <select
               id="doneSelect"
               className="form-select"
@@ -170,3 +182,4 @@ export const EditProject = () => {
     </div>
   );
 };
+

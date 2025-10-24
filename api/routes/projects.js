@@ -5,7 +5,9 @@ import cloudinary from "../config/cloudinary.js";
 import fs from "fs";
 
 const router = express.Router();
-
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 // Multer stores files temporarily before upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -19,27 +21,28 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // CREATE project and upload image to Cloudinary
-router.post("/", upload.single("image"), async (req, res) => {
+// CREATE project with up to 4 images
+router.post("/", upload.array("images", 4), async (req, res) => {
   try {
     const { name, adress, text, done, startDate, finishDate } = req.body;
+    const imageUrls = [];
 
-    let imageUrl = "";
-    if (req.file) {
-      // Upload to Cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "projects", // optional Cloudinary folder
-      });
-      imageUrl = result.secure_url;
-
-      // Delete local temp file
-      fs.unlinkSync(req.file.path);
+    // Upload each selected image to Cloudinary
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        const result = await cloudinary.uploader.upload(file.path, {
+          folder: "projects",
+        });
+        imageUrls.push(result.secure_url);
+        fs.unlinkSync(file.path); // remove temp file
+      }
     }
 
     const project = await Project.create({
       name,
       adress,
       text,
-      image: imageUrl,
+      images: imageUrls, // 👈 stores array instead of single URL
       done: done === "true" || done === true,
       startDate: startDate ? new Date(startDate) : undefined,
       finishDate: finishDate ? new Date(finishDate) : undefined,
@@ -52,11 +55,11 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-// UPDATE project (optional new image)
-router.put("/:id", upload.single("image"), async (req, res) => {
+
+// UPDATE project (optionally change images)
+router.put("/:id", upload.array("images", 4), async (req, res) => {
   try {
     const { name, adress, text, done, startDate, finishDate } = req.body;
-
     const updatedData = {
       name,
       adress,
@@ -64,12 +67,16 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       done: done === "true" || done === true,
     };
 
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "projects",
-      });
-      updatedData.image = result.secure_url;
-      fs.unlinkSync(req.file.path);
+    if (req.files && req.files.length > 0) {
+      const imageUrls = [];
+      for (const file of req.files) {
+        const result = await cloudinary.uploader.upload(file.path, {
+          folder: "projects",
+        });
+        imageUrls.push(result.secure_url);
+        fs.unlinkSync(file.path);
+      }
+      updatedData.images = imageUrls;
     }
 
     if (startDate) updatedData.startDate = new Date(startDate);
@@ -87,6 +94,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "Failed to update project" });
   }
 });
+
 
 // GET all projects
 router.get("/", async (req, res) => {

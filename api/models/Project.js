@@ -4,7 +4,7 @@ const projectSchema = new mongoose.Schema({
     name:{ type:String, required:true},
     adress:{ type:String, required:true},
     text:{ type:String, required:true},
-    image: { type: String },
+    images: [{ type: String }],
     done: { type: Boolean, default: false },
 
     startDate: { type: Date, required: true },   // new field

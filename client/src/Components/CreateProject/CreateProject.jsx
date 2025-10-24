@@ -7,34 +7,44 @@ const CreateProject = () => {
   const [name, setName] = useState("");
   const [adress, setAdress] = useState("");
   const [text, setText] = useState("");
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]); // multiple images
   const [done, setDone] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [finishDate, setFinishDate] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const formData = new FormData();
       formData.append("name", name);
       formData.append("adress", adress);
       formData.append("text", text);
-      formData.append("image", image); // from e.target.files[0]
       formData.append("done", done);
       formData.append("startDate", startDate);
       formData.append("finishDate", finishDate);
+
+      // Append all selected images
+      for (let i = 0; i < images.length; i++) {
+        formData.append("images", images[i]);
+      }
 
       await axios.post(`${API_URL}/api/projects`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      alert("Form submitted!");
+      alert("Proje başarıyla oluşturuldu!");
+      setName("");
+      setAdress("");
+      setText("");
+      setImages([]);
+      setDone(false);
+      setStartDate("");
+      setFinishDate("");
     } catch (err) {
       console.error(err);
-      alert("Error submitting form");
+      alert("Proje oluşturulurken bir hata oluştu!");
     }
   };
 
@@ -66,16 +76,22 @@ const CreateProject = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="image" className="form-label">
-            Upload Image
+          <label htmlFor="images" className="form-label">
+            1–4 Görsel Yükle
           </label>
           <input
             type="file"
             className="form-control"
-            id="image"
+            id="images"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            multiple
+            onChange={(e) => setImages([...e.target.files])}
           />
+          {images.length > 0 && (
+            <p className="text-muted mt-2">
+              {images.length} dosya seçildi
+            </p>
+          )}
         </div>
 
         <div className="form-group">
