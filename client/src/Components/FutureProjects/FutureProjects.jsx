@@ -69,18 +69,23 @@ export const FutureProjects  = ({ isLoggedIn }) => {
           </div>
 
           <div className='col-md-6'>
-            <div className='card bg-dark'>
-              <div className='card-body mx-auto'>
-                {project.image && (
-                  <img
-                    src={`http://localhost:4000${project.image}`}
-                    alt={project.name}
-                    className="img-fluid"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
+  <div className='card bg-dark'>
+    <div className='card-body mx-auto'>
+      {project.image && (
+        <img
+          src={
+            project.image.startsWith("http")
+              ? project.image // Cloudinary URL
+              : `http://localhost:4000${project.image}` // local dev
+          }
+          alt={project.name}
+          className="img-fluid"
+        />
+      )}
+    </div>
+  </div>
+</div>
+
 
           {isLoggedIn && (
             <div className="mt-2">

@@ -1,17 +1,20 @@
 // index.js
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+
 import messagesRoute from "./routes/messages.js";
 import projectsRoute from "./routes/projects.js";
 import User from "./models/User.js";
 import bcrypt from "bcrypt";
 import authRoute from "./routes/auth.js";
-import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
-dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
