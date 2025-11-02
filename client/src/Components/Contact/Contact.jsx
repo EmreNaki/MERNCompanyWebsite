@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar } from '../Navbar/Navbar'
 import { Footer } from '../Footer/Footer'
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaInstagram, FaMobileAlt } from "react-icons/fa";
 import axios from "axios"
 
 export const Contact  = () => {
@@ -34,7 +34,7 @@ export const Contact  = () => {
         <Navbar/>
         <div className='bg-white text-dark py-2'></div>
         <div className="bg-dark text-white py-3 ml-1 mt-5">
-  <h1 className="fw-bold m-1 p-1">İLETİŞİM</h1>
+  <h1 className="fw-bold m-1 p-2">İLETİŞİM</h1>
 </div>
     <div className='container'>
         <div className="row text-dark">
@@ -43,23 +43,39 @@ export const Contact  = () => {
  
 >
            <p><FaMapMarkerAlt />Hacı Abdi Mahallesi, 30 Ağustos Cd. No:9/B, 48200 Milas/Muğla</p>
-      <p><FaPhoneAlt /> +90 555 123 4567</p>
-      <p><FaEnvelope /> info@company.com</p>
+      <p><FaPhoneAlt /> 0252 513 04 01</p>
+       <p><FaMobileAlt/> 0532 436 04 01</p>
+      <p><FaEnvelope /> info@comerlertyapi.com</p>
+     
            
-            <h2 className=' p-2'>Sosyal Medya </h2>
-             <div className="d-flex flex-column ">
-  {/* Instagram */}
-  <div className="d-flex align-items-center mb-3">
-    <FaInstagram style={{ fontSize: "2rem", marginRight: "10px" }} />
-    <span>Instagram</span>
-  </div>
+            <h2 className="p-2">Sosyal Medya</h2>
+  <div className="d-flex flex-column mx-auto text-center">
+    {/* Instagram */}
+    <div className="d-flex align-items-center mb-3">
+      <FaInstagram style={{ fontSize: "2rem", marginRight: "10px" }} />
+      <a
+        href="https://www.instagram.com/comertler_yapi/" // ← kendi linkini buraya yaz
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        Instagram
+      </a>
+    </div>
 
-  {/* Facebook */}
-  <div className="d-flex align-items-center">
-    <FaFacebookF style={{ fontSize: "2rem", marginRight: "10px" }} />
-    <span>Facebook</span>
+    {/* Facebook */}
+    <div className="d-flex align-items-center">
+      <FaFacebookF style={{ fontSize: "2rem", marginRight: "10px" }} />
+      <a
+        href="https://www.facebook.com/profile.php?id=100063476741656" // ← kendi linkini buraya yaz
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        Facebook
+      </a>
+    </div>
   </div>
-</div>
               
         </div>
            <div className='col'>

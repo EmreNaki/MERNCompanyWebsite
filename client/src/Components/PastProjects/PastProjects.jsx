@@ -42,6 +42,12 @@ export const PastProjects = ({ isLoggedIn }) => {
       <div className="bg-dark text-dark py-3 ml-1 mt-5">
         <h1 className="fw-bold text-light ms-3">TAMAMLANAN PROJELERİMİZ</h1>
       </div>
+      <div className='container-fluid bg-image-overlay4 d-flex flex-column mt-3 justify-content-center align-items-center'></div>
+        <div className="text-box">
+
+          <h3 className='text-center text-dark d-flex justify-content-center align-items-center pt-5'>Cömertler Yapı olarak bugüne kadar hayata geçirdiğimiz projelerde güven, estetik ve dayanıklılığı bir araya getirdik. Her yapıda çağdaş mimariyi, kaliteli malzeme kullanımını ve işçilikte mükemmelliği ön planda tuttuk. Zamanında teslim ve müşteri memnuniyeti ilkesiyle hareket ederek sektörde kalıcı bir iz bıraktık. Tamamlanan projelerimiz, gelecekteki çalışmalarımızın en güçlü referansıdır.</h3>
+        </div>
+                    <hr className="border-2 border-dark m-3" />
 
       <div className="container mt-3 mb-3">
         {projects.map((project) => (

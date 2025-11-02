@@ -42,6 +42,12 @@ export const FutureProjects = ({ isLoggedIn }) => {
       <div className="bg-dark text-dark py-3 ml-1 mt-5">
         <h1 className="fw-bold ms-3 text-light">GELECEK PROJELERİMİZ</h1>
       </div>
+                <div className='container-fluid bg-image-overlay5 d-flex flex-column mt-3 justify-content-center align-items-center'></div>
+        <div className="text-box">
+
+          <h3 className='text-center text-dark d-flex justify-content-center align-items-center pt-5'>Yakında hayata geçireceğimiz projelerle modern yaşam anlayışına yeni bir soluk getirmeyi hedefliyoruz. Her detayı özenle tasarlanan yapılarımızda sürdürülebilirlik, estetik ve konforu bir arada sunmayı amaçlıyoruz. Yeni projelerimizle şehir dokusuna değer katarken, müşterilerimize güvenli ve kaliteli yaşam alanları kazandıracağız. İnşaattan öte bir yaşam deneyimi yaratmak için çalışıyoruz.</h3>
+        </div>
+                    <hr className="border-2 border-dark m-3" />
 
       <div className="container mt-3 mb-3">
         {projects.map((project) => (

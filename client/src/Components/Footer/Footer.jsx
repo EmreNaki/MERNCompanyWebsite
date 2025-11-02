@@ -18,9 +18,9 @@ export const Footer = () => {
 
         {/* Right */}
         <div>
-  <a href="#" className="me-2 text-light"><FaFacebookF /></a>
+  <a href="https://www.facebook.com/profile.php?id=100063476741656" className="me-2 text-light"><FaFacebookF /></a>
 
-  <a href="#" className="me-2 text-light"><FaInstagram /></a>
+  <a href="https://www.instagram.com/comertler_yapi/" className="me-2 text-light"><FaInstagram /></a>
   
 </div>
       </section>
@@ -50,9 +50,9 @@ export const Footer = () => {
             <div className="col-md-4 mx-auto mb-2">
               <h6 className="text-uppercase fw-bold mb-2">ADRES</h6>
               <p className="small mb-1"><i className="fas fa-home me-2"></i>Hacı Abdi Mah., 30 Ağustos Cd. No:9/B, 48200 Milas/Muğla</p>
-              <p className="small mb-1"><i className="fas fa-envelope me-2"></i>info@example.com</p>
-              <p className="small mb-1"><i className="fas fa-phone me-2"></i>+ 01 234 567 88</p>
-              <p className="small mb-0"><i className="fas fa-print me-2"></i>+ 01 234 567 89</p>
+              <p className="small mb-1"><i className="fas fa-envelope me-2"></i>info@comerlertyapi.com</p>
+              <p className="small mb-1"><i className="fas fa-phone me-2"></i>+ 0 252 513 0401</p>
+              <p className="small mb-0"><i className="fas fa-print me-2"></i>+ 0 532 436 0401</p>
             </div>
           </div>
         </div>
@@ -63,9 +63,9 @@ export const Footer = () => {
         className="text-center py-2"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)", fontSize: "0.85rem" }}
       >
-        © 2021 Copyright:{" "}
-        <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-          MDBootstrap.com
+        © 2025 Copyright:{" "}
+        <a className="text-reset fw-bold" href="#">
+          Cömertler Yapı & Mühendislik
         </a>
       </div>
     </footer>
